@@ -18,7 +18,7 @@ class FastTextClassifier(BaseEstimator,ClassifierMixin):
 		loss           			loss function {ns, hs, softmax} [softmax]
 		bucket         			number of buckets [0]
 		minn           			min length of char ngram [0]
-		maxn           			max length of char ngram [0]
+		maxn           			min length of char ngram [0]
 		"""
 		self.label_prefix=lpr
 		self.lr=lr
@@ -40,7 +40,7 @@ class FastTextClassifier(BaseEstimator,ClassifierMixin):
 	def predict(self,X):
 		'get class labels for the classifier'
 		pass
-	def report(self,X,y):
+	def report(self,model=None):
 		'prints classification report'
 		pass
 	def predict_proba(self,X,y):
@@ -50,11 +50,26 @@ class FastTextClassifier(BaseEstimator,ClassifierMixin):
 		'retuns classlabels'
 		pass
 	def getproperties(self):
-		'return model descriptions'
-		pass
-	def predict_k(self,X):
-		'get K class labels for the classifier'
-		pass
+                '''
+                Input: Nothing, other than object self pointer
+                Return: None , prints the descriptions of the model hyperparameters
+                '''
+                print("The model has following hyperparameters as part of its specification")
+                print("Label prefix used : "+str(self.label_prefix)
+                print("Learning rate :"+ str(lr))
+                print("Learning rate update after "+str(self.lr_update_rate)+"iterations")
+                print("Embedding size: "+str(self.dim))
+                print("Epochs :"+ str(self.epochs)
+                print("minimal number of word occurences: "+self.min_count)
+                print("number of negatives sampled :"+str(self.neg))
+                print("max length of word ngram "+str(self.word_ngrams))
+                print("loss function: "+str(self.loss))
+                print("number of buckets "+str(self.bucket))
+                print("min length of char ngram:"+str(self.minn))
+                print("min length of char ngram"+ str(self.maxn))
+                return(None)
+                
+		
 	def loadpretrained(self,X):
 		'returns the model with pretrained weights'
 		pass
@@ -100,8 +115,28 @@ loss='softmax',nbucket=0,minn=0,maxn=0,th=12,t=0.0001,verbosec=0,encoding='utf-8
 	def fit(self,X,modelname='model'):
 		pass
 	def getproperties(self):
-		'return model descriptions'
-		pass
+                '''
+                Input: Nothing, other than object self pointer
+                Return: None , prints the descriptions of the model hyperparameters
+                '''
+                print("The model has following hyperparameters as part of its specification")
+                print("Learning rate :"+ str(lr))
+                print("Learning rate update after "+str(self.lr_update_rate)+"iterations")
+                print("Embedding size: "+str(self.dim))
+                print("Epochs :"+ str(self.epochs)
+                print("minimal number of word occurences: "+self.min_count)
+                print("number of negatives sampled :"+str(self.neg))
+                print("max length of word ngram "+str(self.word_ngrams))
+                print("loss function: "+str(self.loss))
+                print("number of buckets "+str(self.bucket))
+                print("min length of char ngram:"+str(self.minn))
+                print("min length of char ngram"+ str(self.maxn))
+                print("number of threads: "+str(self.n_thread))
+                print("sampling threshold"+str(self.samplet))
+                print("Verbose log output from the C++ extension enable=1/disble=0:"+ str(self.silent))
+                print("input_file encoding :"+str(self.enc))
+                return None
+            
 	def getwords(self):
 		'return word list'
 		pass
@@ -149,8 +184,27 @@ loss='softmax',nbucket=0,minn=0,maxn=0,th=12,t=0.0001,verbosec=0,encoding='utf-8
 	def fit(self,X,modelname='model'):
 		pass	
 	def getproperties(self):
-		'return model descriptions'
-		pass
+		'''
+                Input: Nothing, other than object self pointer
+                Return: None , prints the descriptions of the model hyperparameters
+                '''
+                print("The model has following hyperparameters as part of its specification")
+                print("Learning rate :"+ str(lr))
+                print("Learning rate update after "+str(self.lr_update_rate)+"iterations")
+                print("Embedding size: "+str(self.dim))
+                print("Epochs :"+ str(self.epochs)
+                print("minimal number of word occurences: "+self.min_count)
+                print("number of negatives sampled :"+str(self.neg))
+                print("max length of word ngram "+str(self.word_ngrams))
+                print("loss function: "+str(self.loss))
+                print("number of buckets "+str(self.bucket))
+                print("min length of char ngram:"+str(self.minn))
+                print("min length of char ngram"+ str(self.maxn))
+                print("number of threads: "+str(self.n_thread))
+                print("sampling threshold"+str(self.samplet))
+                print("Verbose log output from the C++ extension enable=1/disble=0:"+ str(self.silent))
+                print("input_file encoding :"+str(self.enc))
+                
 	def getwords(self):
 		'return word list'
 		pass
