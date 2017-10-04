@@ -1,10 +1,11 @@
 from sklearn.base import BaseEstimator, ClassifierMixin
-import fasttext
+import fasttext as ft
+from sklearn.metrics import classification_report
 
 class FastTextClassifier(BaseEstimator,ClassifierMixin):
 """Base classiifer of Fasttext estimator"""
 
-	def __init__(self,lpr='__label__',lr=0.1,lru=100,dim=100,ws=5,epoch=5,minc=1,neg=5,ngram=1,loss='softmax',nbucket=0,minn=0,maxn=0):
+	def __init__(self,lpr='__label__',lr=0.1,lru=100,dim=100,ws=5,epoch=5,minc=1,neg=5,ngram=1,loss='softmax',nbucket=0,minn=0,maxn=0,thread=2,silent=1,output="model"):
 		"""
 		label_prefix   			label prefix ['__label__']
 		lr             			learning rate [0.1]
@@ -19,7 +20,9 @@ class FastTextClassifier(BaseEstimator,ClassifierMixin):
 		bucket         			number of buckets [0]
 		minn           			min length of char ngram [0]
 		maxn           			min length of char ngram [0]
+		todo : Recheck need of some of the variables, present in default classifier
 		"""
+		
 		self.label_prefix=lpr
 		self.lr=lr
 		self.lr_update_rate=lru
@@ -33,27 +36,77 @@ class FastTextClassifier(BaseEstimator,ClassifierMixin):
 		self.bucket=bucket
 		self.minn=minn
 		self.maxn=maxn
+		self.thread=thread
+		self.silent=silent
+		self.classifier=None
+		self.result=None
 
-	def fit(self,X,y):
-		'train a classifier and return the model'
-		pass
-	def predict(self,X):
-		'get class labels for the classifier'
-		pass
-	def report(self,model=None):
-		'prints classification report'
-		pass
-	def predict_proba(self,X,y):
-		'return predicted probabilities'
-		pass
+		self.output=output
+
+	def fit(self,input_file):
+                '''
+                Input: takes input file in format
+                returns classifier object
+                to do: add option to feed list of X and Y or file
+                '''
+                
+                self.classifier = ft.supervised(input_file, self.output, dim=self.dim, lr=self.lr, epoch=self.epoch, min_count=self.min_count, word_ngrams=self.word_ngrams, bucket=self.bucket, thread=self.thread, silent=self.silent, label_prefix=self.lpr)
+                self.labels=
+                return(self.classisifer)
+            
+	def predict(self,test_file,csvflag=True,reports=False):
+                '''
+                Input: Takes input test finle in format
+                return results object
+                to do: add unit tests using sentiment analysis dataset 
+                to do: Add K best labels options for csvflag = False 
+                to do: add report option
+                '''
+                try:
+                    if type(test_file) == 'list' and csvflag=False:
+                        self.result=self.classifier.predict(test_file)
+                    else:
+                        print "Error in input"
+                    if csvflag:
+                            self.result=self.classifier.test(test_file)
+                except:
+                    print("Exception in predict call error in format of test_file/input sentence list")
+                return(self.result)
+                
+	def report(self,ytrue,ypred):
+                '''
+                Input: predicted and true labels
+                return reort of classification
+                to do: add label option and unit testing
+                
+                '''
+                print(classification_report(ytrue,ypred))
+                return None
+            
+	def predict_proba(self,X):
+                '''
+                Input: List of sentences
+                return reort of classification
+                to do: check output of classifier predct_proba add label option and unit testing
+                '''
+                labels=self.classifier.predict_proba(X)
+                return(labels)
+
 	def getlabels(self):
-		'retuns classlabels'
-		pass
+                '''
+                Input: None
+                returns: Class labels in dataset
+                to do : check need of the this funcion
+                '''
+		return(self.classifier.labels)
+		
 	def getproperties(self):
+                
                 '''
                 Input: Nothing, other than object self pointer
                 Return: None , prints the descriptions of the model hyperparameters
                 '''
+                
                 print("The model has following hyperparameters as part of its specification")
                 print("Label prefix used : "+str(self.label_prefix)
                 print("Learning rate :"+ str(lr))
