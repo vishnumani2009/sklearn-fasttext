@@ -51,7 +51,6 @@ class FastTextClassifier(BaseEstimator,ClassifierMixin):
                 '''
                 
                 self.classifier = ft.supervised(input_file, self.output, dim=self.dim, lr=self.lr, epoch=self.epoch, min_count=self.min_count, word_ngrams=self.word_ngrams, bucket=self.bucket, thread=self.thread, silent=self.silent, label_prefix=self.lpr)
-                self.labels=
                 return(self.classisifer)
             
 	def predict(self,test_file,csvflag=True,reports=False):
@@ -164,9 +163,25 @@ loss='softmax',nbucket=0,minn=0,maxn=0,th=12,t=0.0001,verbosec=0,encoding='utf-8
 			self.n_thread=th
 			self.samplet=t
 			self.silent=verbosec
-			self.enc=encoding
-	def fit(self,X,modelname='model'):
-		pass
+			self.enc=encodings
+			self.model=None
+			self.result=None
+			
+
+            
+	def fit(self,X,modelname='model',csvflag=False):
+                '''
+                Input: takes input file in format
+                returns classifier object
+                to do: add option to feed list of X and Y or file
+                to do: check options for the api call 
+                to do: write unit test
+                '''
+                try:
+                    if not csvflag:
+                        self.model=ft.skipgram(X, modelname, lr=self.lr, dim=self.dim,lr_update_rate=self.lr_update_rate,epoch=self.epoch,bucket=self.bucket,loss=self.loss,thread=self.n_thread)
+                except:
+                    print("Error in input dataset format")
 	def getproperties(self):
                 '''
                 Input: Nothing, other than object self pointer
@@ -191,12 +206,17 @@ loss='softmax',nbucket=0,minn=0,maxn=0,th=12,t=0.0001,verbosec=0,encoding='utf-8
                 return None
             
 	def getwords(self):
-		'return word list'
-		pass
-	def getvector(self):
-		'return embedding'
-		pass
-
+                """to do: check words list"""
+		return(self.model.words)
+            # list of words in dictionary)
+	def getvector(self,word=None):
+                """
+                to do : add try catch for word type
+                to do: add try catch for word existance 
+                """
+                return(self.model[word])
+            
+            
 class cbowFastText((BaseEstimator,ClassifierMixin):
 	def __init__(self,lpr='__label__',lr=0.1,lru=100,dim=100,ws=5,epoch=5,minc=1,neg=5,ngram=1,\
 loss='softmax',nbucket=0,minn=0,maxn=0,th=12,t=0.0001,verbosec=0,encoding='utf-8'):			"""
