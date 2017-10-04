@@ -254,8 +254,21 @@ loss='softmax',nbucket=0,minn=0,maxn=0,th=12,t=0.0001,verbosec=0,encoding='utf-8
 			self.samplet=t
 			self.silent=verbosec
 			self.enc=encoding	
+
 	def fit(self,X,modelname='model'):
-		pass	
+                '''
+                Input: takes input file in format
+                returns classifier object
+                to do: add option to feed list of X and Y or file
+                to do: check options for the api call 
+                to do: write unit test
+                '''
+		try:
+                    if not csvflag:
+                        self.model=ft.cbow(X, modelname, lr=self.lr, dim=self.dim,lr_update_rate=self.lr_update_rate,epoch=self.epoch,bucket=self.bucket,loss=self.loss,thread=self.n_thread)
+                except:
+                    print("Error in input dataset format")
+                    
 	def getproperties(self):
 		'''
                 Input: Nothing, other than object self pointer
@@ -279,11 +292,15 @@ loss='softmax',nbucket=0,minn=0,maxn=0,th=12,t=0.0001,verbosec=0,encoding='utf-8
                 print("input_file encoding :"+str(self.enc))
                 
 	def getwords(self):
-		'return word list'
-		pass
+		"""to do: check words list"""
+		return(self.model.words)
+
 	def getvector(self):
-		'return embedding'
-		pass
+		       """
+                to do : add try catch for word type
+                to do: add try catch for word existance 
+                """
+                return(self.model[word])
 
 		
 
