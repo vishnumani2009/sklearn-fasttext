@@ -1,0 +1,30 @@
+*.egg-info
+data/
+*.pyc
+*.so
+*.tar.gz
+*.DS_Store
+*.bin
+*.vec
+
+build/
+result/
+dist/
+
+fasttext/fasttext.cpp
+facebookresearch-fasttext-*
+
+# Intellij
+.idea/
+
+# pip
+.eggs/
+
+# For test
+test/*_result.txt
+test/dbpedia.train
+test/dbpedia_csv/
+test/default_params_test
+
+# Misc
+TODO
