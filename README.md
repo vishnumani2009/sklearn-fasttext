@@ -94,6 +94,8 @@ classifier.predict_proba(texts, k) # Predict the most likely label include their
 
 ```
 
+### Native API usage
+The source codes could be used with native interface of original fasttext as well. See documentation that follows.
 
 ### Word representation learning
 
@@ -499,6 +501,10 @@ and equal to `1` by default.
   year={2016}
 }
 ```
+
+### Native python interface
+A huge thank you to [fastText.py](https://github.com/salestock/fastText.py) for building such a amazing native python interface around which this scikit wrapper is written
+
 
 (\* These authors contributed equally.)
 
