@@ -403,22 +403,48 @@ and equal to `1` by default.
 
 The scikit-learn interface is consistent with of native scikit-learn API
 
-# Skipgram model
+### Skipgram model
+```python
 from skfasttext.CBOW import SkipgramFastText
 clf=SkipgramFastText()
 clf.fit(train_file)
+```
 
-
-# CBOW model
+### CBOW model
+```python
 from skfasttext.CBOW import cbowFastText
 clf=cbowFastText()
 clf.fit(train_file)
+```
+### Attributes and methods for the model
 
+Skipgram and CBOW model have the following atributes & methods
 
-# Fasttext classifier model
+```python
+model.model_name       # Model name
+model.words            # List of words in the dictionary
+model.dim              # Size of word vector
+model.ws               # Size of context window
+model.epoch            # Number of epochs
+model.min_count        # Minimal number of word occurences
+model.neg              # Number of negative sampled
+model.word_ngrams      # Max length of word ngram
+model.loss_name        # Loss function name
+model.bucket           # Number of buckets
+model.minn             # Min length of char ngram
+model.maxn             # Max length of char ngram
+model.lr_update_rate   # Rate of updates for the learning rate
+model.t                # Value of sampling threshold
+model.encoding         # Encoding of the model
+model[word]            # Get the vector of specified word
+```
+
+### Fasttext classifier model
+```python
 from skfasttext.FastTextClassifier import FastTextClassifier
 clf=FastTextClassifier()
 clf.fit(train_file)
+```
 
 Classifier have the following atributes & methods
 
