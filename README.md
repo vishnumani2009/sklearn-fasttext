@@ -23,6 +23,78 @@ These were described in the two papers
 [1](#enriching-word-vectors-with-subword-information)
 and [2](#bag-of-tricks-for-efficient-text-classification).
 
+### Scikit-learn interface
+
+The scikit-learn interface is consistent with of native scikit-learn API
+
+### Skipgram model
+```python
+from skfasttext.SkipGram import SkipgramFastText
+clf=SkipgramFastText()
+clf.fit(train_file)
+```
+
+### CBOW model
+```python
+from skfasttext.CBOW import cbowFastText
+clf=cbowFastText()
+clf.fit(train_file)
+```
+### Attributes and methods for the model
+
+Skipgram and CBOW model have the following atributes & methods
+
+```python
+model.model_name       # Model name
+model.words            # List of words in the dictionary
+model.dim              # Size of word vector
+model.ws               # Size of context window
+model.epoch            # Number of epochs
+model.min_count        # Minimal number of word occurences
+model.neg              # Number of negative sampled
+model.word_ngrams      # Max length of word ngram
+model.loss_name        # Loss function name
+model.bucket           # Number of buckets
+model.minn             # Min length of char ngram
+model.maxn             # Max length of char ngram
+model.lr_update_rate   # Rate of updates for the learning rate
+model.t                # Value of sampling threshold
+model.encoding         # Encoding of the model
+model[word]            # Get the vector of specified word
+```
+
+### Fasttext classifier model
+```python
+from skfasttext.FastTextClassifier import FastTextClassifier
+clf=FastTextClassifier()
+clf.fit(train_file)
+```
+
+Classifier have the following atributes & methods
+
+```python
+classifier.labels                  # List of labels
+classifier.label_prefix            # Prefix of the label
+classifier.dim                     # Size of word vector
+classifier.ws                      # Size of context window
+classifier.epoch                   # Number of epochs
+classifier.min_count               # Minimal number of word occurences
+classifier.neg                     # Number of negative sampled
+classifier.word_ngrams             # Max length of word ngram
+classifier.loss_name               # Loss function name
+classifier.bucket                  # Number of buckets
+classifier.minn                    # Min length of char ngram
+classifier.maxn                    # Max length of char ngram
+classifier.lr_update_rate          # Rate of updates for the learning rate
+classifier.t                       # Value of sampling threshold
+classifier.encoding                # Encoding that used by classifier
+classifier.test(filename, k)       # Test the classifier
+classifier.predict(texts, k)       # Predict the most likely label
+classifier.predict_proba(texts, k) # Predict the most likely label include their probability
+
+```
+
+
 ### Word representation learning
 
 In order to learn word vectors, as described in
@@ -399,76 +471,6 @@ The param `k` for `classifier.test`, `classifier.predict` and
 and equal to `1` by default.
 
 
-### Scikit-learn interface
-
-The scikit-learn interface is consistent with of native scikit-learn API
-
-### Skipgram model
-```python
-from skfasttext.CBOW import SkipgramFastText
-clf=SkipgramFastText()
-clf.fit(train_file)
-```
-
-### CBOW model
-```python
-from skfasttext.CBOW import cbowFastText
-clf=cbowFastText()
-clf.fit(train_file)
-```
-### Attributes and methods for the model
-
-Skipgram and CBOW model have the following atributes & methods
-
-```python
-model.model_name       # Model name
-model.words            # List of words in the dictionary
-model.dim              # Size of word vector
-model.ws               # Size of context window
-model.epoch            # Number of epochs
-model.min_count        # Minimal number of word occurences
-model.neg              # Number of negative sampled
-model.word_ngrams      # Max length of word ngram
-model.loss_name        # Loss function name
-model.bucket           # Number of buckets
-model.minn             # Min length of char ngram
-model.maxn             # Max length of char ngram
-model.lr_update_rate   # Rate of updates for the learning rate
-model.t                # Value of sampling threshold
-model.encoding         # Encoding of the model
-model[word]            # Get the vector of specified word
-```
-
-### Fasttext classifier model
-```python
-from skfasttext.FastTextClassifier import FastTextClassifier
-clf=FastTextClassifier()
-clf.fit(train_file)
-```
-
-Classifier have the following atributes & methods
-
-```python
-classifier.labels                  # List of labels
-classifier.label_prefix            # Prefix of the label
-classifier.dim                     # Size of word vector
-classifier.ws                      # Size of context window
-classifier.epoch                   # Number of epochs
-classifier.min_count               # Minimal number of word occurences
-classifier.neg                     # Number of negative sampled
-classifier.word_ngrams             # Max length of word ngram
-classifier.loss_name               # Loss function name
-classifier.bucket                  # Number of buckets
-classifier.minn                    # Min length of char ngram
-classifier.maxn                    # Max length of char ngram
-classifier.lr_update_rate          # Rate of updates for the learning rate
-classifier.t                       # Value of sampling threshold
-classifier.encoding                # Encoding that used by classifier
-classifier.test(filename, k)       # Test the classifier
-classifier.predict(texts, k)       # Predict the most likely label
-classifier.predict_proba(texts, k) # Predict the most likely label include their probability
-
-```
 
 ## References
 
