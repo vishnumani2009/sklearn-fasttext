@@ -501,12 +501,12 @@ and equal to `1` by default.
   year={2016}
 }
 ```
+(\* These authors contributed equally.)
+
 
 ### Native python interface
 A huge thank you to [fastText.py](https://github.com/salestock/fastText.py) for building such a amazing native python interface around which this scikit wrapper is written
 
-
-(\* These authors contributed equally.)
 
 ## Join the fastText community
 
